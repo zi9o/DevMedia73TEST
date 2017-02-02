@@ -1,0 +1,156 @@
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light  tasks-widget">
+            <form name="TaskForm" class="form-horizontal" novalidate>
+                <!-- TASK HEAD -->
+                <div class="form">
+                    <div class="form-group">
+                        <div class="col-md-8 col-sm-8">
+                            <span class="pull-left">Create your task</span>
+                        </div>
+                    </div>
+                    <!-- END TASK HEAD -->
+                    <!-- TASK TITLE -->
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input name="title" type="text" ng-model="task.title" required
+                                   class="form-control todo-taskbody-tasktitle" placeholder="Task Title...">
+                        </div>
+                        <div class="row">
+                            <div ng-if="interacted(TaskForm.title)" ng-messages="TaskForm.title.$error"
+                                 class="col-md-6 col-md-offset-2 error-messages">
+                                <div ng-message="required">
+                                    The title is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TASK DESC -->
+                    <div class="form-group">
+                        <div class="col-md-12">
+                        <textarea name="description" ng-model="task.description" class="form-control todo-taskbody-taskdesc" rows="8"
+                                  placeholder="Task Description..." required></textarea>
+                        </div>
+                        <div class="row">
+                            <div ng-if="interacted(TaskForm.description)" ng-messages="TaskForm.description.$error"
+                                 class="col-md-6 col-md-offset-2 error-messages">
+                                <div ng-message="required">
+                                    The description is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END TASK DESC -->
+                    <!-- TASK DUE DATE -->
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-icon">
+                                <i class="fa fa-calendar"></i>
+                                <input name="endDate" type="date" ng-model="task.endDate" class="form-control todo-taskbody-due"
+                                       placeholder="Due Date..." required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div ng-if="interacted(TaskForm.endDate)" ng-messages="TaskForm.endDate.$error"
+                                 class="col-md-6 col-md-offset-2 error-messages">
+                                <div ng-message="required">
+                                    The due date is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TASK TAGS -->
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <select name="state" ng-model="task.state" class="form-control todo-taskbody-tags" required>
+                                <option value="pending">pending</option>
+                                <option value="InProgress">InProgress</option>
+                                <option value="completed">completed</option>
+                                <option value="closed">closed</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div ng-if="interacted(TaskForm.state)" ng-messages="TaskForm.state.$error"
+                                 class="col-md-6 col-md-offset-2 error-messages">
+                                <div ng-message="required">
+                                    The status is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- TASK TAGS -->
+                    <div class="form-actions right todo-form-actions">
+                        <button ng-click="submitTaskForm()" ladda="saveTaskLoading" class="btn btn-circle btn-sm green">
+                            Save Changes
+                        </button>
+                        <button ng-click="clearTaskForm()" class="btn btn-circle btn-sm btn-default">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject bold uppercase"> Tasks</span>
+                    <span class="caption-helper" ng-show="tasks.length!=0">{{(tasks|filter :q|filter :{finished:false}).length}} restantes sur un total de {{(tasks|filter :q).length}} </span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <button class="btn sbold green"> Add New, Fill the form
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pull-right">
+                            <div class="portlet-input input-small input-inline">
+                                <div class="input-icon right">
+                                    <i class="icon-magnifier"></i>
+                                    <input ng-model="q.$" type="text" class="form-control form-control-solid"
+                                           placeholder="search..."></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" class="group-checkable" ng-model="tasksSelected"
+                                   ng-change="allTasksChecked()"/></th>
+                        <th> Title</th>
+                        <th> Description</th>
+                        <th> Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="{{$index}}" ng-repeat="task in tasks | filter:q" class="odd gradeX">
+                        <td>
+                            <input ng-model="task.finished" ng-change="taskChanged(task,$index)" type="checkbox"
+                                   class="checkboxes"/></td>
+                        <td>
+                            {{task.title}}
+                        </td>
+                        <td>
+                            {{task.description}}
+                        </td>
+                        <td>
+                            <span ng-class="'label label-sm label-success'"> {{task.state}} </span>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+
+</div>

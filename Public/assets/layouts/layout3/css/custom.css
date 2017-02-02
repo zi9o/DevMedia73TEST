@@ -1,0 +1,34 @@
+/* here you can put your own css to customize and override the theme */
+[ng\:cloak],
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+.ng-hide, [ng-cloak] {
+    display: none !important;
+}
+
+.ng-show {
+    display: block !important;
+}
+/* styling error messages*/
+.error-messages.ng-active {
+    background: #ff0c11;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 15px;
+    position: relative;
+}
+
+.error-messages.ng-active:after {
+    position: absolute;
+    top: -10px;
+    content: "";
+    left: 20px;
+    border-style: solid;
+    border-color: transparent transparent #FF0C11;
+    border-width: 5px;
+}

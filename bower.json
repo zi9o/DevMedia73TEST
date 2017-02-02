@@ -1,0 +1,25 @@
+{
+  "name": "DevMedia73-TodoAPP",
+  "description": "Todo app",
+  "author": "DevMedia73/zakaria",
+  "dependencies": {
+    "bootstrap": "~3",
+    "angular-ui-router": "^0.3.0",
+    "angular-messages": "^1.6.0",
+    "satellizer": "^0.15.5",
+    "angular-resource": "^1.6.1",
+    "angular-toastr": "^2.1.1",
+    "angular-animate": "^1.6.1",
+    "angular-sanitize": "^1.6.1",
+    "angular": "^1.6.1",
+    "angular-material": "^1.1.1",
+    "angular-bootstrap": "^2.4.0",
+    "angular-touch": "^1.6.1",
+    "angular-loading-bar": "^0.9.0",
+    "angular-ladda": "^0.4.3",
+    "angular-mocks": "^1.6.1"
+  },
+  "resolutions": {
+    "angular": "^1.6.1"
+  }
+}
